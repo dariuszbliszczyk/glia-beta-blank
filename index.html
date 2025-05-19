@@ -15,8 +15,14 @@
 
       var queryParamName = "external_session_id";
 
+      const params = new Proxy(new URLSearchParams(window.location.search), {
+        get: (searchParams, prop) => searchParams.get(prop),
+      });
+      const idToken = params.idtoken;
+
       return {
-        sessionId: extractQueryParamValueFromString(queryParamName, window.location.href)
+        sessionId: extractQueryParamValueFromString(queryParamName, window.location.href),
+        idToken: idToken
       };
     };
   </script>
